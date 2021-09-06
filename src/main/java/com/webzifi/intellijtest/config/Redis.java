@@ -1,7 +1,8 @@
-package config;
+package com.webzifi.intellijtest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,6 +22,8 @@ public class Redis {
         return new JedisConnectionFactory(configuration);
     }
 
+    @Bean
+    @Primary
     public RedisTemplate<String,Object> redisTemplate(){
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory());

@@ -1,13 +1,15 @@
-package entity;
+package com.webzifi.intellijtest.entity;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table
 @RedisHash("product")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     private int id;
