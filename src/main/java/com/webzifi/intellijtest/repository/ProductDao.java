@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.SortedSet;
 
 @Repository
 public class ProductDao {
@@ -25,6 +26,7 @@ public class ProductDao {
     }
 
     public Product findProductById(int id){
+        System.out.println("called findProductById() from DB");
         return (Product) template.opsForHash().get(HASH_KEY, id);
     }
 

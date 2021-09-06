@@ -4,6 +4,8 @@ import com.webzifi.intellijtest.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.*;
 import com.webzifi.intellijtest.repository.ProductDao;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @SpringBootApplication
 @RestController
 @RequestMapping("/product")
+@EnableCaching
 public class WebzifiCachingRedisApplication {
 
 	@Autowired
@@ -27,6 +30,7 @@ public class WebzifiCachingRedisApplication {
 		return dao.findAll();
 	}
 
+	@Cacheable(key = "#id", value = "Product", unless = "#result.price > 2000")
 	@GetMapping("/{id}")
 	public Product findProduct(@PathVariable int id){
 		return dao.findProductById(id);
